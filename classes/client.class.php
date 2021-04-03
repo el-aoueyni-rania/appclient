@@ -15,7 +15,7 @@ class Client
     public function getAllClients()
     {
         try {
-            $sql = "SELECT * FROM clients";
+            $sql = "SELECT * FROM client";
             $query = $this->pdo->prepare($sql);
             $query->execute();
             return $query;
@@ -27,7 +27,7 @@ class Client
     public function getOneClient($id)
     {
         try {
-            $sql = "SELECT * FROM clients WHERE id = ?";
+            $sql = "SELECT * FROM client WHERE id = ?";
             $query = $this->pdo->prepare($sql);
             $query->execute([$id]);
             return $query;
@@ -40,7 +40,7 @@ class Client
     {
         try {
             $sql = "
-                INSERt INTO clients(nom, prenom, datenaissance, adresse, tel)
+                INSERt INTO client(nom, prenom, datenaissance, adresse, tel)
                 VALUES (?, ?, ?, ?, ?)
                 ";
             $query = $this->pdo->prepare($sql);
@@ -54,23 +54,8 @@ class Client
     public function updateClient($id, $nom, $prenom, $dateBirth, $adr, $tel)
     {
         try {
-            // $sql = 'UPDATE clients
-            //         SET nom = :clt_nom,
-            //             prenom = :clt_prenom,
-            //             datenaissance = :clt_dateN,
-            //             adresse = :clt_adr,
-            //             tel = :clt_tel
-            //         WHERE id = :clt_id';
-            // $result = $this->pdo->prepare($sql);
-            // $result->bindparam(":clt_id", $id);
-            // $result->bindparam(":clt_nom", $nom);
-            // $result->bindparam(":clt_prenom", $prenom);
-            // $result->bindparam(":clt_dateN", $dateBirth);
-            // $result->bindparam(":clt_adr", $adr);
-            // $result->bindparam(":clt_tel", $tel);
-            // $result->execute();
-            // ou bien
-            $sql = 'UPDATE clients
+           
+            $sql = 'UPDATE client
                     SET nom = ?,
                         prenom = ?,
                         datenaissance = ?,
@@ -88,7 +73,7 @@ class Client
     public function deleteClient($id)
     {
         try {
-            $sql = 'DELETE FROM clients WHERE id = :clt_id';
+            $sql = 'DELETE FROM client WHERE id = :clt_id';
             $result = $this->pdo->prepare($sql);
             $result->bindparam(":clt_id", $id);
             $result->execute();
